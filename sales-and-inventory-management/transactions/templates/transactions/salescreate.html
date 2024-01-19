@@ -1,0 +1,281 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Add Sale transaction{% endblock title %}{% block content %}
+<!-- Include required libraries -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<!-- 
+<div class="sales-order"></div>
+<div></div>
+<div></div> -->
+<!-- 
+<div class="sales-order ">
+     <div style="flex: 3; height: 30px; width: 50px;background-color: yellow;">
+        <i class="fa-solid fa-plus"></i>
+    </div> -->
+
+<div style="margin-top: 20px; display: flex;margin-left: 51px;">
+    <a href="{% url 'transactions:new_bill' %}" onclick="newBill()">
+        <button style="height: 50px;width: 150px;border: solid 2px;background-color: rgb(61, 130, 60); color: white;">
+            NewBill</button>
+    </a>
+</div>
+<div style="flex: 1; ">
+    <table border="1"
+        style="border-collapse: collapse; width: 70%; border: solid 2px; margin-top: 30px;margin-left: 50px;">
+        <tr style="border: solid 2px;">
+
+
+            <th style="padding: 8px; text-align: left;">Customer Name</th>
+            <th style="padding: 8px; text-align: left;">Item</th>
+            <th style="padding: 8px; text-align: left;">Quantity</th>
+            <th style="padding: 8px; text-align: left;">Price</th>
+            <th style="padding: 8px; text-align: left;">Payment method</th>
+            <th style="padding: 8px; text-align: left;"></th>
+        </tr>
+        <tr>
+            <form method="POST" action="{% url 'transactions:billing_details'  %}">
+                {% csrf_token %}
+
+                <td style="padding: 8px; text-align: left;">
+                    <input type="text" name="cus_name" id="cus_name" required>
+                </td>
+
+                <!-- all products list dropdown for selecting desired products  -->
+                <td style="padding: 8px; text-align: left;" required>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <input type="hidden" id="selected_item_input" value="" name="selected_item">
+                            {% if item_name %}
+                            <h6>{{item_name}}</h6>
+
+                            {% else %}
+                            select the product
+                            {% endif %}
+
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                            <li>
+                                {% for item in items %}
+                                <a class="dropdown-item" onclick="setSelectedItem('{{ item.slug }}')"
+                                    href="{% url 'transactions:add_item' item.slug %}">
+                                    {{item.slug}} </a>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td style="padding: 8px; text-align: left;">
+                    <input type="number" name='quantity' required>
+
+                </td>
+                {% if price %}
+                <td style="padding: 8px; text-align: left;">
+                    <input type="text" name="price" value="{{price}}">
+                </td>
+                {% else %}
+                <td style="padding: 8px; text-align: left;">
+                    <input type="number" name="price" required>
+                </td>
+                {% endif %}
+                <td style="padding: 8px; text-align: left;" required>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Payment method
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <label class="dropdown-item">
+                                    <input type="radio" name="payment_method" value="VISA"
+                                        onclick="updateDropdownText(this);">
+                                    VISA
+                                </label>
+                            </li>
+                            <li>
+                                <label class="dropdown-item">
+                                    <input type="radio" name="payment_method" value="CS"
+                                        onclick="updateDropdownText(this);">
+                                    CASH
+                                </label>
+                            </li>
+                            <li>
+                                <label class="dropdown-item">
+                                    <input type="radio" name="payment_method" value="BK"
+                                        onclick="updateDropdownText(this);">
+                                    UPI
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+
+                <td style="padding: 8px; text-align: left;">
+                    <input type="submit" class="btn btn-secondary" value="Add" onclick="submitForm()">
+                </td>
+
+            </form>
+
+        </tr>
+    </table>
+</div>
+
+<br>
+<br>
+
+<h4><strong></strong></h4>
+<table class="table-bill" border="1"
+    style="border-collapse: collapse; width: 70%; border: solid 2px; margin-top: 30px;margin-left: 50px;">
+    <tr style="border: solid 2px;">
+        <th style="padding: 8px; text-align: left;"></th>
+        <th style="padding: 8px; text-align: left;">Item</th>
+        <th style="padding: 8px; text-align: left;">Quantity</th>
+        <th style="padding: 8px; text-align: left;">Price</th>
+        <th style="padding: 8px; text-align: left;">Subtotal</th>
+        <th style="padding: 8px; text-align: left;">Total</th>
+
+    </tr>
+    {% for bill in biling_details %}
+    <tr>
+        <td style="padding: 8px; text-align: left;"><a href="{% url 'transactions:delete_bill_single' bill.id %}">X</a></td>
+        <td style="padding: 8px; text-align: left;">{{bill.sale.item.slug}}</td>
+        <td style="padding: 8px; text-align: left;">{{bill.sale.quantity}}</td>
+        <td style="padding: 8px; text-align: left;">{{bill.sale.price}}</td>
+        <td style="padding: 8px; text-align: left;" class="subTotalValue">{{bill.sale.total_value}}</td>
+    </tr>
+    {% endfor %}
+    <tr id="totalRow">
+        <td colspan="5" style="padding: 8px; text-align: left;"></td>
+        <td style="padding: 8px; text-align: left;">
+            <h6 id="totalValue"></h6>
+        </td>
+    </tr>
+</table>
+
+<div style="margin-top: 20px; display: flex;margin-left: 51px;">
+    <a href="{% url 'transactions:print_bill' %}" onclick="generatePDF()">
+        <button style="height: 50px;width: 150px;border: solid 2px;background-color: rgb(38, 120, 76); color: white;">
+            Print</button>
+    </a>
+</div>
+
+
+<script>
+    function validateForm() {
+        var cusName = document.getElementById('cus_name').value;
+        var selectedItem = document.getElementById('selected_item_input').value;
+        var quantity = document.querySelector('input[name="quantity"]').value;
+        var price = document.querySelector('input[name="price"]').value;
+        var paymentMethod = document.querySelector('input[name="payment_method"]:checked');
+    
+        if (cusName === '' || selectedItem === '' || quantity === '' || price === '' || !paymentMethod) {
+            alert('Please fill in all fields!');
+            return false; // Prevent form submission
+        }
+    
+        // Optionally, you can perform more specific validation for each field (e.g., numeric validation)
+    
+        return true; // Allow form submission if all fields are filled
+    }
+    </script>
+
+<script>
+    function generatePDF() {
+        const doc = new jsPDF();
+        const table = document.querySelector('table-bill');
+
+        // Convert HTML table to PDF
+        doc.html(table, {
+            callback: function (pdf) {
+                pdf.save('table_data.pdf'); // Save PDF as 'table_data.pdf'
+            }
+        });
+    }
+</script>
+
+<script>
+    function updateDropdownText(selected) {
+        var dropdownButton = selected.closest('.dropdown').querySelector('.dropdown-toggle');
+        dropdownButton.textContent = selected.value;
+        dropdownButton.classList.add('selected');
+    }
+</script>
+
+<script>
+    function setSelectedItem(selectedValue) {
+
+        localStorage.setItem('backendValue', selectedValue);
+
+    }
+</script>
+
+<script>
+    // Function to handle form submission
+    function submitForm() {
+
+        // Retrieve the value from localStorage
+        var storedItemName = localStorage.getItem('backendValue');
+
+        // Set the value of the hidden input field
+        document.getElementById('selected_item_input').value = storedItemName;
+
+        // Retrieve the value from local storage
+
+
+    }
+
+</script>
+<script>
+    // Get the input field
+    const cusNameInput = document.getElementById('cus_name');
+
+    // Function to save the input value to local storage
+    function saveToLocalStorage() {
+        localStorage.setItem('savedCusName', cusNameInput.value);
+    }
+
+    // Event listener for input change
+    cusNameInput.addEventListener('input', saveToLocalStorage);
+
+    // On page load, check if there's a saved value and assign it to the input field
+    window.onload = function () {
+        const savedCusName = localStorage.getItem('savedCusName');
+        if (savedCusName) {
+            cusNameInput.value = savedCusName;
+        }
+    };
+</script>
+<script>
+    function newBill() {
+        localStorage.removeItem('savedCusName')
+    }
+</script>
+
+
+
+<script>
+    // Calculate and display the total
+    window.addEventListener('DOMContentLoaded', () => {
+        const subTotalValues = document.querySelectorAll('.subTotalValue');
+        let total = 0;
+
+        subTotalValues.forEach(subTotal => {
+            total += parseFloat(subTotal.textContent);
+        });
+
+        const totalColumn = document.querySelectorAll('table tr td:last-child h6');
+        totalColumn.forEach(element => {
+            element.textContent = total.toFixed(2); // Display the total in the total column
+        });
+    });
+</script>
+
+
+
+{% endblock content %}

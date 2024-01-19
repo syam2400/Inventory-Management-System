@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2a28931a-b7ae-4496-b3df-ac6f369aa4bc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/InventoryMS/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/InventoryMS/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/accounts/templates/accounts/stafflist.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/accounts/templates/accounts/stafflist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/accounts/templates/accounts/staffupdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/accounts/templates/accounts/staffupdate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/bills/templates/bills/billcreate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/bills/templates/bills/billcreate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/bills/templates/bills/billupdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/bills/templates/bills/billupdate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/invoice/templates/invoice/invoicecreate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/invoice/templates/invoice/invoicecreate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/invoice/templates/invoice/invoiceupdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/invoice/templates/invoice/invoiceupdate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/store/templates/store/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/store/templates/store/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/store/templates/store/deliveriescreate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/store/templates/store/deliveriescreate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/store/templates/store/deliveryupdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/store/templates/store/deliveryupdate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/store/templates/store/productslist.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/store/templates/store/productslist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/transactions/templates/transactions/purchasescreate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/transactions/templates/transactions/purchasescreate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/transactions/templates/transactions/purchaseupdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/transactions/templates/transactions/purchaseupdate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/transactions/templates/transactions/sale_update.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/transactions/templates/transactions/sale_update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sales-and-inventory-management/transactions/templates/transactions/salescreate.html" beforeDir="false" afterPath="$PROJECT_DIR$/sales-and-inventory-management/transactions/templates/transactions/salescreate.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/sales-and-inventory-management" />
+  </component>
+  <component name="ProjectId" id="2XFOY4a881VrDaQk46KwUmgce12" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/Jipson/Management System/sales-and-inventory-management"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2a28931a-b7ae-4496-b3df-ac6f369aa4bc" name="Changes" comment="" />
+      <created>1698221405809</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698221405809</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
